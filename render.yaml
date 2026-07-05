@@ -2,6 +2,7 @@ services:
   - type: web
     name: study-room
     runtime: node
+    plan: free
     buildCommand: npm run install:all && npm run build
     startCommand: npm start
     envVars:
@@ -11,7 +12,3 @@ services:
         generateValue: true
       - key: CLIENT_URL
         value: ""
-    disk:
-      name: study-room-data
-      mountPath: /opt/render/project/src/server/data
-      sizeGB: 1
