@@ -26,7 +26,7 @@ const Participant = {
 
   findByRoomAndUser(roomId, userId) {
     return db.prepare(
-      'SELECT * FROM participants WHERE room_id = ? AND user_id = ? AND socket_id IS NOT NULL'
+      'SELECT * FROM participants WHERE room_id = ? AND user_id = ?'
     ).get(roomId, userId);
   },
 
@@ -35,8 +35,7 @@ const Participant = {
   },
 
   removeFromRoom(id) {
-    db.prepare('DELETE FROM tasks WHERE participant_id = ?').run(id);
-    db.prepare('DELETE FROM participants WHERE id = ?').run(id);
+    db.prepare('UPDATE participants SET socket_id = NULL WHERE id = ?').run(id);
   },
 
   findNextHost(roomId, excludeId) {

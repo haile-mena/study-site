@@ -62,7 +62,7 @@ const roomService = {
       newHost: null,
     };
 
-    // If the leaving participant was the host, transfer host
+    // If the leaving participant was the host, transfer to next connected person
     if (room.host_id === participant.id) {
       const nextHost = Participant.findNextHost(room.id, participant.id);
       if (nextHost) {
@@ -70,10 +70,8 @@ const roomService = {
         Message.create(room.id, null, `Host role transferred to ${nextHost.display_name}`, 'system');
         result.hostTransferred = true;
         result.newHost = nextHost;
-      } else {
-        // No one left connected — clear host
-        Room.setHost(room.id, null);
       }
+      // If no one else is connected, keep host_id as-is so they can rejoin as host
     }
 
     return result;

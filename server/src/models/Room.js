@@ -25,6 +25,15 @@ const Room = {
   setStatus(roomId, status) {
     db.prepare('UPDATE rooms SET status = ? WHERE id = ?').run(status, roomId);
   },
+
+  findByUserId(userId) {
+    return db.prepare(
+      `SELECT DISTINCT r.* FROM rooms r
+       INNER JOIN participants p ON p.room_id = r.id
+       WHERE p.user_id = ?
+       ORDER BY r.created_at DESC`
+    ).all(userId);
+  },
 };
 
 module.exports = Room;

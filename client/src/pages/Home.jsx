@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { BookOpen, Users, LogIn, LogOut } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { BookOpen, Users, LogIn, LogOut, LayoutDashboard } from 'lucide-react';
 import { useRoomContext } from '../context/RoomContext';
 import { useAuth } from '../context/AuthContext';
 
 export default function Home() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { createRoom, joinRoom } = useRoomContext();
   const { user, logout, loading: authLoading } = useAuth();
 
@@ -15,6 +16,23 @@ export default function Home() {
   const [inviteCode, setInviteCode] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // Auto-rejoin from dashboard
+  useEffect(() => {
+    const code = location.state?.rejoinCode;
+    if (code && user && !authLoading) {
+      setLoading(true);
+      joinRoom(code, user.display_name, user.id)
+        .then((result) => {
+          if (result.error) setError(result.error);
+          else navigate('/room');
+        })
+        .catch(() => setError('Failed to rejoin room'))
+        .finally(() => setLoading(false));
+      // Clear the state so it doesn't re-trigger
+      window.history.replaceState({}, '');
+    }
+  }, [location.state, user, authLoading]);
 
   const effectiveDisplayName = user ? user.display_name : displayName.trim();
 
@@ -70,6 +88,12 @@ export default function Home() {
               <span className="text-sm text-gray-400">
                 Signed in as <span className="text-indigo-400 font-medium">{user.display_name}</span>
               </span>
+              <button
+                onClick={() => navigate('/dashboard')}
+                className="flex items-center gap-1 text-xs text-indigo-400 hover:text-indigo-300 transition-colors"
+              >
+                <LayoutDashboard className="w-3.5 h-3.5" /> My Sessions
+              </button>
               <button
                 onClick={logout}
                 className="flex items-center gap-1 text-xs text-gray-500 hover:text-gray-300 transition-colors"
