@@ -1,3 +1,6 @@
+// sockets/chatEvents.js
+// Handles the 'chat-send' event. Saves the message to DB and broadcasts to all room members.
+
 const Message = require('../models/Message');
 const Participant = require('../models/Participant');
 

@@ -1,3 +1,8 @@
+// pages/Home.jsx
+// Landing page. Users can create a new room or join an existing one by invite code.
+// Shows sign-in/out for auth, pre-fills display name for logged-in users,
+// and supports auto-rejoin when navigated from the Dashboard.
+
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { BookOpen, Users, LogIn, LogOut, LayoutDashboard } from 'lucide-react';

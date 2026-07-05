@@ -1,3 +1,7 @@
+// routes/auth.js
+// REST endpoints for user registration, login, and fetching the current user.
+// Passwords are hashed with bcrypt before storage. Auth uses JWT tokens.
+
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();

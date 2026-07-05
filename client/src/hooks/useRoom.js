@@ -1,3 +1,8 @@
+// hooks/useRoom.js
+// Core hook that manages all room state: participants, messages, tasks, timer.
+// Listens to socket events for real-time updates and exposes actions
+// like createRoom, joinRoom, sendMessage, addTask, startTimer, etc.
+
 import { useState, useEffect, useCallback } from 'react';
 
 export function useRoom(socketRef) {
@@ -70,6 +75,7 @@ export function useRoom(socketRef) {
     };
   }, [socketRef]);
 
+  // Create a new room and become the host
   const createRoom = useCallback((roomName, displayName, userId = null) => {
     return new Promise((resolve) => {
       socketRef.current.emit('create-room', { roomName, displayName, userId }, (state) => {
@@ -84,6 +90,7 @@ export function useRoom(socketRef) {
     });
   }, [socketRef]);
 
+  // Join an existing room by invite code
   const joinRoom = useCallback((inviteCode, displayName, userId = null) => {
     return new Promise((resolve) => {
       socketRef.current.emit('join-room', { inviteCode, displayName, userId }, (state) => {
@@ -102,6 +109,7 @@ export function useRoom(socketRef) {
     });
   }, [socketRef]);
 
+  // Leave the current room and reset all state
   const leaveRoom = useCallback(() => {
     socketRef.current.emit('leave-room');
     setRoom(null);
@@ -111,31 +119,37 @@ export function useRoom(socketRef) {
     setTasks([]);
   }, [socketRef]);
 
+  // End the session (host-only)
   const endSession = useCallback(() => {
     if (!room) return;
     socketRef.current.emit('end-session', { roomId: room.id });
   }, [socketRef, room]);
 
+  // Send a chat message
   const sendMessage = useCallback((text) => {
     if (!room) return;
     socketRef.current.emit('chat-send', { roomId: room.id, text });
   }, [socketRef, room]);
 
+  // Add a task to your task list
   const addTask = useCallback((text) => {
     if (!room) return;
     socketRef.current.emit('task-add', { roomId: room.id, text });
   }, [socketRef, room]);
 
+  // Toggle a task complete/incomplete
   const toggleTask = useCallback((taskId) => {
     if (!room) return;
     socketRef.current.emit('task-toggle', { roomId: room.id, taskId });
   }, [socketRef, room]);
 
+  // Delete a task
   const deleteTask = useCallback((taskId) => {
     if (!room) return;
     socketRef.current.emit('task-delete', { roomId: room.id, taskId });
   }, [socketRef, room]);
 
+  // Timer controls (host-only)
   const startTimer = useCallback(() => {
     if (!room) return;
     socketRef.current.emit('timer-start', { roomId: room.id });
@@ -151,6 +165,7 @@ export function useRoom(socketRef) {
     socketRef.current.emit('timer-reset', { roomId: room.id, duration });
   }, [socketRef, room]);
 
+  // True if the current user is the room host
   const isHost = room && participantId && room.host_id === participantId;
 
   return {

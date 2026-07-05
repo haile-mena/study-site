@@ -1,7 +1,11 @@
+// middleware/validateHost.js
+// Checks that the socket making a request is the host of the given room.
+// Used to protect host-only actions like timer controls and ending sessions.
+
 const Room = require('../models/Room');
 const Participant = require('../models/Participant');
 
-// Socket.io middleware-style function to validate host-only actions
+// Returns true if the socket is the host, false otherwise (sends error via callback)
 function validateHost(socket, roomId, callback) {
   const participant = Participant.findBySocketId(socket.id);
   if (!participant) {

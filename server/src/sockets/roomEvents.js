@@ -1,3 +1,7 @@
+// sockets/roomEvents.js
+// Handles socket events for room lifecycle: create, join, leave, end session, disconnect.
+// On disconnect, automatically leaves the room and transfers host if needed.
+
 const roomService = require('../services/roomService');
 const timerService = require('../services/timerService');
 const Participant = require('../models/Participant');
@@ -64,6 +68,7 @@ module.exports = function roomEvents(io, socket) {
   });
 };
 
+// Shared handler for both explicit leave and disconnect events
 function handleLeave(io, socket) {
   const result = roomService.leaveRoom(socket.id);
   if (!result) return;

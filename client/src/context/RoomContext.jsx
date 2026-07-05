@@ -1,3 +1,7 @@
+// context/RoomContext.jsx
+// Provides room state (participants, messages, tasks, timer, actions) to the entire app.
+// Wraps useSocket and useRoom so any component can access room data via useRoomContext().
+
 import { createContext, useContext } from 'react';
 import { useSocket } from '../hooks/useSocket';
 import { useRoom } from '../hooks/useRoom';

@@ -1,12 +1,18 @@
+// services/roomService.js
+// Core business logic for creating, joining, leaving, and ending study rooms.
+// Handles invite codes, host assignment, host transfer, and reconnection.
+
 const Room = require('../models/Room');
 const Participant = require('../models/Participant');
 const Message = require('../models/Message');
 
+// Generate a random 6-character invite code (e.g. 'A3BX9K')
 function generateInviteCode() {
   return Math.random().toString(36).substring(2, 8).toUpperCase();
 }
 
 const roomService = {
+  // Create a new room, add the creator as host, and log a system message
   createRoom(roomName, displayName, socketId, userId = null) {
     const inviteCode = generateInviteCode();
     const room = Room.create(roomName, inviteCode);
@@ -21,6 +27,7 @@ const roomService = {
     };
   },
 
+  // Join an existing room by invite code. Logged-in users reconnect to their old participant.
   joinRoom(inviteCode, displayName, socketId, userId = null) {
     const room = Room.findByInviteCode(inviteCode);
     if (!room) return { error: 'Room not found' };
@@ -45,6 +52,7 @@ const roomService = {
     };
   },
 
+  // Handle a participant leaving. Transfers host to next person if needed.
   leaveRoom(socketId, io) {
     const participant = Participant.findBySocketId(socketId);
     if (!participant) return null;
@@ -77,6 +85,7 @@ const roomService = {
     return result;
   },
 
+  // End a session (host-only). Marks the room as 'ended'.
   endSession(roomId, participantId) {
     const room = Room.findById(roomId);
     if (!room) return { error: 'Room not found' };
@@ -88,6 +97,7 @@ const roomService = {
     return { success: true };
   },
 
+  // Get the full current state of a room (room, participants, messages, tasks)
   getRoomState(roomId) {
     const room = Room.findById(roomId);
     const participants = Participant.findByRoomId(roomId);

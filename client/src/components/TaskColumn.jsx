@@ -1,3 +1,6 @@
+// components/TaskColumn.jsx
+// A single participant's task list. Only the task owner can add, toggle, or delete tasks.
+
 import { useState } from 'react';
 import { Plus, Trash2, CheckCircle, Circle } from 'lucide-react';
 import { useRoomContext } from '../context/RoomContext';

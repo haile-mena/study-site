@@ -1,3 +1,7 @@
+// sockets/timerEvents.js
+// Handles timer-start, timer-pause, timer-reset, and timer-get events.
+// Start/pause/reset are host-only (validated server-side). Get is available to everyone.
+
 const timerService = require('../services/timerService');
 const validateHost = require('../middleware/validateHost');
 

@@ -1,3 +1,8 @@
+// context/AuthContext.jsx
+// Manages user authentication state (login, register, logout).
+// Persists JWT token in localStorage. On load, validates the token with the server.
+// Any component can access auth state via useAuth().
+
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const API_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:3001';
@@ -29,6 +34,7 @@ export function AuthProvider({ children }) {
       .finally(() => setLoading(false));
   }, [token]);
 
+  // Register a new account — saves token and sets user on success
   const register = async (username, password, displayName) => {
     const res = await fetch(`${API_URL}/api/auth/register`, {
       method: 'POST',
@@ -43,6 +49,7 @@ export function AuthProvider({ children }) {
     return data;
   };
 
+  // Log in with existing credentials
   const login = async (username, password) => {
     const res = await fetch(`${API_URL}/api/auth/login`, {
       method: 'POST',
@@ -57,6 +64,7 @@ export function AuthProvider({ children }) {
     return data;
   };
 
+  // Clear auth state and remove stored token
   const logout = () => {
     localStorage.removeItem('token');
     setToken(null);

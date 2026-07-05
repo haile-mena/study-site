@@ -1,3 +1,6 @@
+// components/TaskBoard.jsx
+// Renders a horizontal scrollable board with one TaskColumn per participant.
+
 import { useRoomContext } from '../context/RoomContext';
 import TaskColumn from './TaskColumn';
 

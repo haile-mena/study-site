@@ -1,3 +1,6 @@
+// components/Chat.jsx
+// Real-time chat panel. Displays chat and system messages, auto-scrolls to bottom.
+
 import { useState, useRef, useEffect } from 'react';
 import { Send } from 'lucide-react';
 import { useRoomContext } from '../context/RoomContext';

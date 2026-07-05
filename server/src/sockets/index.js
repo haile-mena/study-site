@@ -1,3 +1,7 @@
+// sockets/index.js
+// Entry point for all Socket.io event handlers.
+// Registers room, chat, task, and timer event listeners on each new connection.
+
 const roomEvents = require('./roomEvents');
 const chatEvents = require('./chatEvents');
 const taskEvents = require('./taskEvents');

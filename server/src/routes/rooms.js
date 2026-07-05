@@ -1,3 +1,8 @@
+// routes/rooms.js
+// REST endpoints for room lookup and user session history.
+// The /user/sessions route requires authentication (returns rooms the user has been in).
+// The /:code route is public (used to check if a room exists before joining).
+
 const express = require('express');
 const router = express.Router();
 const Room = require('../models/Room');

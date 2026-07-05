@@ -1,3 +1,7 @@
+// app.js
+// Sets up the Express app, HTTP server, and Socket.io.
+// Mounts REST routes (/api/auth, /api/rooms) and registers socket event handlers.
+
 const express = require('express');
 const cors = require('cors');
 const { createServer } = require('http');

@@ -1,3 +1,7 @@
+// pages/Login.jsx
+// Login and registration page. Toggles between sign-in and sign-up forms.
+// Also includes a "Continue as Guest" link to skip auth entirely.
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BookOpen } from 'lucide-react';

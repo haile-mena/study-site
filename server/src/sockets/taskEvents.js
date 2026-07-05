@@ -1,3 +1,7 @@
+// sockets/taskEvents.js
+// Handles task-add, task-toggle, and task-delete events.
+// Each participant can only modify their own tasks (enforced server-side).
+
 const Task = require('../models/Task');
 const Participant = require('../models/Participant');
 

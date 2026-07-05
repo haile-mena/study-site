@@ -1,3 +1,7 @@
+// components/Timer.jsx
+// Displays the countdown timer. Host sees start/pause/reset controls and a duration picker.
+// Non-hosts see a read-only timer. Syncs with server via socket events.
+
 import { useState, useEffect } from 'react';
 import { Play, Pause, RotateCcw, Clock } from 'lucide-react';
 import { useRoomContext } from '../context/RoomContext';

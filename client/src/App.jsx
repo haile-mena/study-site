@@ -1,3 +1,7 @@
+// App.jsx
+// Root component. Sets up routing and wraps the app in AuthProvider and RoomProvider.
+// Routes: / (Home), /login, /room, /dashboard, /session-ended
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { RoomProvider } from './context/RoomContext';

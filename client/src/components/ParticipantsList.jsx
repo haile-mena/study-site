@@ -1,3 +1,6 @@
+// components/ParticipantsList.jsx
+// Shows all connected participants in the room with a crown icon for the host.
+
 import { Crown, User } from 'lucide-react';
 import { useRoomContext } from '../context/RoomContext';
 

@@ -1,3 +1,6 @@
+// server.js
+// Entry point. Initializes the database, then starts the HTTP + WebSocket server.
+
 const db = require('./src/db');
 
 const PORT = process.env.PORT || 3001;

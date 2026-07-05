@@ -1,3 +1,6 @@
+// utils/formatTime.js
+// Converts milliseconds to a MM:SS display string for the timer.
+
 export function formatTime(ms) {
   const totalSeconds = Math.max(0, Math.floor(ms / 1000));
   const minutes = Math.floor(totalSeconds / 60);

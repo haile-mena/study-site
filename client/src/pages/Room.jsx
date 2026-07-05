@@ -1,3 +1,7 @@
+// pages/Room.jsx
+// The main study room view. Shows the header (room name, invite code, leave/end buttons),
+// a sidebar with participants and timer, and the task board and chat in the main area.
+
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LogOut, DoorClosed, Copy, Check } from 'lucide-react';

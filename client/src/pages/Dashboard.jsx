@@ -1,3 +1,7 @@
+// pages/Dashboard.jsx
+// Shows all study sessions a logged-in user has participated in.
+// Filterable by active/ended status. Active sessions have a "Rejoin" button.
+
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BookOpen, Users, ArrowLeft, Circle } from 'lucide-react';

@@ -1,3 +1,6 @@
+// pages/SessionEnded.jsx
+// Shown when the host ends a study session. Provides a button to go back home.
+
 import { useNavigate } from 'react-router-dom';
 import { BookOpen } from 'lucide-react';
 
