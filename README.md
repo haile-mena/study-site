@@ -6,6 +6,7 @@ A real-time collaborative study room app (inspired by Hours by Fiveable, rebuilt
 ## Deployment
 
 This app is deployed on Render. Can be viewed at https://study-room-njn8.onrender.com
+View a demo of the site on youtube: https://youtu.be/FVwsrvCbyBA
 
 ---
 
