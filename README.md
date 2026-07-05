@@ -3,6 +3,10 @@
 ## Overview
 A real-time collaborative study room app (inspired by Hours by Fiveable, rebuilt from scratch). Users create or join a shared "room" where they can chat, manage individual task lists, and track time together with a shared timer. Supports both guest and registered user flows.
 
+## Deployment
+
+This app is deployed on Render. Can be viewed at https://study-room-njn8.onrender.com
+
 ---
 
 ## Tech Stack
