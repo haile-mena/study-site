@@ -1,7 +1,7 @@
 # Study Room App — Project Spec
 
 ## Overview
-A real-time collaborative study room app (inspired by a now-defunct product, rebuilt from scratch). Users create or join a shared "room" where they can chat, manage individual task lists, and track time together with a shared timer.
+A real-time collaborative study room app (inspired by a now-defunct product Hours by Fiveable, rebuilt from scratch). Users create or join a shared "room" where they can chat, manage individual task lists, and track time together with a shared timer.
 
 **Why this project:** demonstrates real-time state sync across multiple clients, permission/authorization logic, and graceful handling of disconnects — all common topics in technical interviews and directly relevant to maintenance/support-style engineering roles.
 
