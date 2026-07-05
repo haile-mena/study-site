@@ -5,7 +5,8 @@
 import { useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 
-const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:3001';
+// In production (single-service deploy), connect to same origin; in dev, use localhost:3001
+const SERVER_URL = import.meta.env.VITE_SERVER_URL || (import.meta.env.PROD ? '' : 'http://localhost:3001');
 
 export function useSocket() {
   const socketRef = useRef(null);

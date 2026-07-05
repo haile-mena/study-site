@@ -5,7 +5,8 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 
-const API_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:3001';
+// In production, API is on the same origin; in dev, use localhost:3001
+const API_URL = import.meta.env.VITE_SERVER_URL || (import.meta.env.PROD ? '' : 'http://localhost:3001');
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {

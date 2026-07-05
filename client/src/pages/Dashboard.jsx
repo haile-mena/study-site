@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { BookOpen, Users, ArrowLeft, Circle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-const API_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:3001';
+const API_URL = import.meta.env.VITE_SERVER_URL || (import.meta.env.PROD ? '' : 'http://localhost:3001');
 
 export default function Dashboard() {
   const navigate = useNavigate();
