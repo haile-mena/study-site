@@ -1,0 +1,57 @@
+study-room-app/
+├── client/                        # React (Vite) frontend
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── ParticipantsList.jsx
+│   │   │   ├── Chat.jsx
+│   │   │   ├── Timer.jsx
+│   │   │   ├── TaskBoard.jsx
+│   │   │   ├── TaskColumn.jsx
+│   │   │   └── SystemMessage.jsx
+│   │   ├── pages/
+│   │   │   ├── Home.jsx           # create/join screen
+│   │   │   ├── Room.jsx           # main room view, assembles components above
+│   │   │   └── SessionEnded.jsx
+│   │   ├── hooks/
+│   │   │   ├── useSocket.js       # sets up + exposes the socket connection
+│   │   │   └── useRoom.js         # room state (participants, tasks, messages, timer)
+│   │   ├── context/
+│   │   │   └── RoomContext.jsx    # shares room state across components without prop drilling
+│   │   ├── utils/
+│   │   │   └── formatTime.js      # ms -> mm:ss for timer display
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   ├── package.json
+│   └── vite.config.js
+│
+├── server/                        # Node + Express + Socket.io backend
+│   ├── src/
+│   │   ├── sockets/
+│   │   │   ├── index.js           # attaches all socket event handlers to io
+│   │   │   ├── roomEvents.js      # create-room, join-room, leave-room, host-transferred
+│   │   │   ├── taskEvents.js      # task-add, task-toggle, task-delete
+│   │   │   ├── chatEvents.js      # chat-send
+│   │   │   └── timerEvents.js     # timer-start, timer-pause, timer-reset, timer-sync
+│   │   ├── models/
+│   │   │   ├── Room.js
+│   │   │   ├── Participant.js
+│   │   │   ├── Task.js
+│   │   │   └── Message.js
+│   │   ├── services/
+│   │   │   ├── roomService.js     # createRoom, joinRoom, endSession, transferHost logic
+│   │   │   └── timerService.js    # startedAt timestamp logic, server-side timer state
+│   │   ├── middleware/
+│   │   │   └── validateHost.js    # server-side check for host-only actions
+│   │   ├── db/
+│   │   │   ├── index.js           # SQLite connection setup
+│   │   │   └── schema.sql         # table definitions (rooms, participants, tasks, messages)
+│   │   ├── routes/
+│   │   │   └── rooms.js           # REST fallback routes (e.g. GET /rooms/:code to check room exists)
+│   │   └── app.js                 # Express app setup, mounts routes + socket.io
+│   ├── package.json
+│   └── server.js                  # entry point, starts http server + Socket.io
+│
+├── .gitignore
+└── README.md                      # project overview, setup instructions, design decisions
